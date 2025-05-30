@@ -65,8 +65,9 @@ const SmartChef: React.FC = () => {
 
         {/* Recipe Recommendations */}
         <Box sx={{ mb: 4 }}>
+          {" "}
           {recommendedDishes.length > 0 && (
-            <div className="recommendations-section">
+            <div className="recommendations-section fade-in">
               <div className="dishes-list">
                 {recommendedDishes.map((dish, index) => (
                   <div
@@ -101,7 +102,6 @@ const SmartChef: React.FC = () => {
               </div>
             </div>
           )}
-
           {loading && (
             <div className="loading-container">
               <div className="cooking-animation">
@@ -111,25 +111,25 @@ const SmartChef: React.FC = () => {
                 Söker efter recept för dina ingredienser...
               </p>
             </div>
-          )}
-
+          )}{" "}
           {error && (
             <Alert severity="error" sx={{ my: 2 }} className="error">
               {error}
             </Alert>
           )}
-
-          <div className="button-container">
-            <button
-              className="recommend-button"
-              onClick={getRecommendations}
-              disabled={loading || ingredients?.length === 0}
-            >
-              {loading
-                ? "Hämtar rekommendationer..."
-                : "Hämta receptrekommendationer"}
-            </button>
-          </div>
+          {recommendedDishes.length === 0 && (
+            <div className="button-container">
+              <button
+                className="recommend-button"
+                onClick={getRecommendations}
+                disabled={loading || ingredients?.length === 0}
+              >
+                {loading
+                  ? "Hämtar rekommendationer..."
+                  : "Hämta receptrekommendationer"}
+              </button>
+            </div>
+          )}
         </Box>
       </Container>
     </div>

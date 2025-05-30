@@ -2,7 +2,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  font-family: "Playfair Display", "Merriweather", Georgia, serif;
+  font-family: "Montserrat", "Open Sans", sans-serif;
   color: #432818;
   background-color: #fffaf2;
 }
@@ -10,7 +10,7 @@
 h1,
 h2 {
   color: #5a3921;
-  font-family: "Playfair Display", serif;
+  font-family: "Poppins", sans-serif;
 }
 
 h1 {
@@ -26,6 +26,10 @@ h1 {
 .recommendations-section {
   margin-bottom: 40px;
   transition: all 0.5s ease;
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-in;
 }
 
 .ingredients-header {
@@ -70,7 +74,7 @@ h1 {
   font-size: 20px;
   border-bottom: 2px solid #e6d5c3;
   padding-bottom: 8px;
-  font-family: "Merriweather", Georgia, serif;
+  font-family: "Poppins", sans-serif;
   position: relative;
 }
 
@@ -109,6 +113,9 @@ h1 {
   align-items: center;
   padding: 60px 0;
   position: relative;
+  animation: fadeIn 0.8s ease-in;
+  opacity: 1;
+  transition: opacity 0.5s ease-out, height 0.5s ease-out;
 }
 
 .button-container::before {
@@ -120,6 +127,17 @@ h1 {
   height: 1px;
   background: radial-gradient(circle, rgba(230, 126, 34, 0.2), transparent);
   z-index: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .recommend-button {
@@ -222,8 +240,9 @@ h1 {
   margin-top: 10px;
   font-style: italic;
   color: #795548;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   max-width: 300px;
+  font-family: "Open Sans", sans-serif;
 }
 
 @keyframes spin {
@@ -252,7 +271,7 @@ h1 {
   padding: 15px 20px;
   border-radius: 8px;
   border-left: 4px solid #e74c3c;
-  font-family: "Merriweather", Georgia, serif;
+  font-family: "Open Sans", sans-serif;
   box-shadow: 0 3px 10px rgba(231, 76, 60, 0.1);
 }
 
@@ -314,43 +333,55 @@ h1 {
 .dish-card h3 {
   margin-top: 0;
   color: #5a3921;
-  font-family: "Playfair Display", serif;
-  font-size: 1.6rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
   border-bottom: 2px solid #e6d5c3;
   padding-bottom: 12px;
   margin-bottom: 20px;
   position: relative;
+  font-weight: 600;
 }
 
+/* Removing the dot/bullet that appears on hover */
 .dish-card h3::after {
-  content: "•";
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 0;
-  color: #e67e22;
-  font-size: 1.5rem;
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: all 0.3s ease;
+  width: 0;
+  height: 2px;
+  background-color: #e67e22;
+  transition: width 0.4s ease;
 }
 
 .dish-card:hover h3::after {
-  opacity: 1;
-  transform: translateX(0);
+  width: 40px;
 }
 
 .dish-card p {
-  color: #795548;
-  font-style: italic;
+  color: #614936;
   line-height: 1.6;
   margin-bottom: 25px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.95rem;
 }
 
 .dish-card h4 {
-  font-family: "Playfair Display", serif;
+  font-family: "Poppins", sans-serif;
   color: #5a3921;
-  margin: 15px 0 10px;
-  font-size: 1.2rem;
+  margin: 15px 0 15px;
+  font-size: 1.1rem;
+  position: relative;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.dish-instructions h4 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-bottom: 20px;
+  z-index: 1;
 }
 
 @keyframes fadeInCards {
@@ -369,8 +400,11 @@ h1 {
 .dish-ingredients li {
   position: relative;
   padding-left: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   color: #614936;
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .dish-ingredients li::before {
@@ -385,14 +419,15 @@ h1 {
 .dish-instructions {
   margin-top: 20px;
   position: relative;
+  padding-top: 40px;
 }
 
 .dish-instructions::before {
   content: "";
   position: absolute;
-  top: 0;
+  top: 40px;
   left: 10px;
-  height: 100%;
+  height: calc(100% - 40px);
   width: 2px;
   background-color: #e6d5c3;
   z-index: 0;
@@ -406,11 +441,14 @@ h1 {
 }
 
 .dish-instructions li {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   position: relative;
-  padding-left: 10px;
+  padding-left: 12px;
   counter-increment: step-counter;
   color: #614936;
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .dish-instructions li::before {
