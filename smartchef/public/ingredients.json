@@ -1,0 +1,54 @@
+{
+  "ingredients": [
+    {
+      "id": 1,
+      "name": "Rice",
+      "category": "Grains"
+    },
+    {
+      "id": 2,
+      "name": "Pasta",
+      "category": "Grains"
+    },
+    {
+      "id": 3,
+      "name": "Potatoes",
+      "category": "Vegetables"
+    },
+    {
+      "id": 4,
+      "name": "Butter",
+      "category": "Dairy"
+    },
+    {
+      "id": 5,
+      "name": "Milk",
+      "category": "Dairy"
+    },
+    {
+      "id": 6,
+      "name": "Eggs",
+      "category": "Protein"
+    },
+    {
+      "id": 7,
+      "name": "Chicken",
+      "category": "Protein"
+    },
+    {
+      "id": 8,
+      "name": "Onions",
+      "category": "Vegetables"
+    },
+    {
+      "id": 9,
+      "name": "Garlic",
+      "category": "Vegetables"
+    },
+    {
+      "id": 10,
+      "name": "Tomatoes",
+      "category": "Vegetables"
+    }
+  ]
+}
