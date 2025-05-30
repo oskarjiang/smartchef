@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Ingredient, IngredientsData, Dish } from "../types";
+import { Ingredient, Dish } from "../types";
 import { getRecipeRecommendations } from "../services/recipeService";
 
 const SmartChef: React.FC = () => {
@@ -13,8 +13,8 @@ const SmartChef: React.FC = () => {
     const fetchIngredients = async () => {
       try {
         const response = await fetch("/ingredients.json");
-        const data: IngredientsData = await response.json();
-        setIngredients(data.ingredients);
+        const data: Ingredient[] = await response.json();
+        setIngredients(data);
       } catch (err) {
         setError("Failed to load ingredients");
         console.error("Error loading ingredients:", err);
@@ -48,15 +48,6 @@ const SmartChef: React.FC = () => {
       setLoading(false);
     }
   };
-
-  // Group ingredients by category for display
-  const groupedIngredients: { [key: string]: Ingredient[] } = {};
-  ingredients.forEach((ingredient) => {
-    if (!groupedIngredients[ingredient.category]) {
-      groupedIngredients[ingredient.category] = [];
-    }
-    groupedIngredients[ingredient.category].push(ingredient);
-  });
 
   return (
     <div className="smart-chef">
@@ -93,7 +84,7 @@ const SmartChef: React.FC = () => {
         <button
           className="recommend-button"
           onClick={getRecommendations}
-          disabled={loading || ingredients.length === 0}
+          disabled={loading || ingredients?.length === 0}
         >
           {loading
             ? "Getting Recommendations..."

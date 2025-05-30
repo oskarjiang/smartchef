@@ -5,10 +5,6 @@ export interface Ingredient {
   quantity: string;
 }
 
-export interface IngredientsData {
-  ingredients: Ingredient[];
-}
-
 export interface Dish {
   name: string;
   description: string;

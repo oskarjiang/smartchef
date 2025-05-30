@@ -1,64 +1,18 @@
-{
-  "ingredients": [
-    {
-      "id": 1,
-      "name": "Rice",
-      "category": "Grains",
-      "quantity": "2 cups"
-    },
-    {
-      "id": 2,
-      "name": "Pasta",
-      "category": "Grains",
-      "quantity": "1 box"
-    },
-    {
-      "id": 3,
-      "name": "Potatoes",
-      "category": "Vegetables",
-      "quantity": "5 medium"
-    },
-    {
-      "id": 4,
-      "name": "Butter",
-      "category": "Dairy",
-      "quantity": "250g"
-    },
-    {
-      "id": 5,
-      "name": "Milk",
-      "category": "Dairy",
-      "quantity": "1 liter"
-    },
-    {
-      "id": 6,
-      "name": "Eggs",
-      "category": "Protein",
-      "quantity": "12"
-    },
-    {
-      "id": 7,
-      "name": "Chicken",
-      "category": "Protein",
-      "quantity": "500g"
-    },
-    {
-      "id": 8,
-      "name": "Onions",
-      "category": "Vegetables",
-      "quantity": "3"
-    },
-    {
-      "id": 9,
-      "name": "Garlic",
-      "category": "Vegetables",
-      "quantity": "1 bulb"
-    },
-    {
-      "id": 10,
-      "name": "Tomatoes",
-      "category": "Vegetables",
-      "quantity": "4"
-    }
-  ]
-}
+[
+  "Vetemjöl",
+  "Strösocker",
+  "Ljus sirap",
+  "Kakao",
+  "Pärlsocker",
+  "Florsocker",
+  "Mandelmjöl",
+  "Bakpulver",
+  "Bikarbonat",
+  "Vaniljsocker",
+  "Majsmjöl",
+  "Salt",
+  "Kanel",
+  "Rapsolja",
+  "Mjölk",
+  "Smör"
+]
