@@ -7,7 +7,6 @@ const SmartChef: React.FC = () => {
   const [recommendedDishes, setRecommendedDishes] = useState<Dish[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-
   // Fetch ingredients from JSON file
   useEffect(() => {
     const fetchIngredients = async () => {
@@ -16,18 +15,17 @@ const SmartChef: React.FC = () => {
         const data: Ingredient[] = await response.json();
         setIngredients(data);
       } catch (err) {
-        setError("Failed to load ingredients");
+        setError("Kunde inte ladda ingredienser");
         console.error("Error loading ingredients:", err);
       }
     };
 
     fetchIngredients();
   }, []);
-
   // Get recipe recommendations using all ingredients from the JSON file
   const getRecommendations = async () => {
     if (ingredients.length === 0) {
-      setError("No ingredients available");
+      setError("Inga ingredienser tillgängliga");
       return;
     }
 
@@ -39,31 +37,30 @@ const SmartChef: React.FC = () => {
       setRecommendedDishes(dishes);
 
       if (dishes.length === 0) {
-        setError("No recipes found with available ingredients");
+        setError("Inga recept hittades med tillgängliga ingredienser");
       }
     } catch (err) {
-      setError("Failed to get recipe recommendations");
+      setError("Kunde inte hämta receptrekommendationer");
       console.error("Error getting recommendations:", err);
     } finally {
       setLoading(false);
     }
   };
-
   return (
     <div className="smart-chef">
-      <h1>Smart Chef</h1>
+      <h1>Smart Kock</h1>
       {/* Recipe Recommendations */}
       <div className="recommendations-section">
         {recommendedDishes.length > 0 ? (
           <>
-            <h2>Recipe Recommendations</h2>
+            <h2>Receptrekommendationer</h2>
             <div className="dishes-list">
               {recommendedDishes.map((dish, index) => (
                 <div key={index} className="dish-card">
                   <h3>{dish.name}</h3>
                   <p>{dish.description}</p>
                   <div className="dish-ingredients">
-                    <strong>Ingredients:</strong>
+                    <strong>Ingredienser:</strong>
                     <ul>
                       {dish.ingredients.map((ing, i) => (
                         <li key={i}>{ing}</li>
@@ -78,7 +75,7 @@ const SmartChef: React.FC = () => {
           <></>
         )}
 
-        {loading && <div className="loading">Loading recommendations...</div>}
+        {loading && <div className="loading">Laddar rekommendationer...</div>}
         {error && <div className="error">{error}</div>}
 
         <button
@@ -87,8 +84,8 @@ const SmartChef: React.FC = () => {
           disabled={loading || ingredients?.length === 0}
         >
           {loading
-            ? "Getting Recommendations..."
-            : "Get Recipe Recommendations"}
+            ? "Hämtar rekommendationer..."
+            : "Hämta receptrekommendationer"}
         </button>
       </div>
     </div>
