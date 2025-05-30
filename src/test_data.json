@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Chokladkaka",
+    "description": "En saftig chokladkaka som är enkel att baka och perfekt för fika.",
+    "ingredients": [
+      "2 dl vetemjöl",
+      "1 dl kakao",
+      "2 dl strösocker",
+      "1 tsk bakpulver",
+      "0.5 tsk bikarbonat",
+      "1 tsk vaniljsocker",
+      "0.5 tsk salt",
+      "1 dl rapsolja",
+      "1 dl mjölk",
+      "2 ägg"
+    ],
+    "instructions": [
+      "Förvärm ugnen till 175 grader.",
+      "Blanda de torra ingredienserna i en skål.",
+      "Tillsätt rapsolja, mjölk och ägg. Rör om tills smeten är slät.",
+      "Häll smeten i en smord form.",
+      "Grädda i ugnen i 25-30 minuter.",
+      "Låt kakan svalna innan du skär den."
+    ]
+  },
+  {
+    "name": "Mandelkakor",
+    "description": "Spröda och söta mandelkakor som är lätta att göra.",
+    "ingredients": [
+      "2 dl mandelmjöl",
+      "1 dl strösocker",
+      "1 tsk vaniljsocker",
+      "1 dl rapsolja",
+      "1 dl vetemjöl",
+      "1 tsk bakpulver",
+      "Pärlsocker för dekorering"
+    ],
+    "instructions": [
+      "Förvärm ugnen till 180 grader.",
+      "Blanda mandelmjöl, vetemjöl, strösocker, bakpulver och vaniljsocker i en skål.",
+      "Tillsätt rapsolja och blanda till en deg.",
+      "Forma små bollar av degen och rulla dem i pärlsocker.",
+      "Lägg bollarna på en plåt med bakplåtspapper.",
+      "Grädda i ugnen i 10-12 minuter."
+    ]
+  },
+  {
+    "name": "Kanelbullar",
+    "description": "Klassiska kanelbullar som är perfekta för kaffet.",
+    "ingredients": [
+      "5 dl vetemjöl",
+      "1 dl strösocker",
+      "1 tsk kanel",
+      "1 tsk bakpulver",
+      "0.5 tsk salt",
+      "1 dl mjölk",
+      "50 g smör",
+      "1 ägg"
+    ],
+    "instructions": [
+      "Smält smöret och blanda det med mjölken.",
+      "Blanda alla torra ingredienser i en skål.",
+      "Tillsätt mjölk- och smörblandningen samt ägget.",
+      "Kna degen tills den är smidig.",
+      "Låt degen jäsa i 30 minuter.",
+      "Rulla ut degen och strö över kanel och socker.",
+      "Rulla ihop och skär i bitar.",
+      "Låt jäsa i 20 minuter innan gräddning.",
+      "Grädda i 20 minuter i 200 grader."
+    ]
+  }
+]
