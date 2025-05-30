@@ -1,4 +1,43 @@
-# Getting Started with Create React App
+# Smart Chef Application
+
+Smart Chef is a React application that recommends recipes based on the ingredients you have. It uses OpenAI's API to generate intelligent recipe recommendations.
+
+## Features
+
+- Select ingredients from a categorized list
+- Search for specific ingredients
+- Get AI-powered recipe recommendations
+- View detailed recipe information
+
+## Getting Started
+
+1. Clone this repository
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Set up your OpenAI API key:
+
+   - Copy `.env.example` to `.env`
+   - Replace `your_openai_api_key_here` with your actual OpenAI API key
+
+4. Start the development server:
+   ```
+   npm start
+   ```
+5. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## How It Works
+
+1. Select ingredients from the available list
+2. Click the "Get Recipe Recommendations" button
+3. The app will send your ingredients to OpenAI's API
+4. AI will generate recipe recommendations based on your ingredients
+5. View the recommended dishes with descriptions and ingredient lists
+
+## Available Scripts
+
+In the project directory, you can run:ed with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

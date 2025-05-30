@@ -1,7 +1,7 @@
-import React from 'react';
-import './App.css';
-import SmartChef from './components/SmartChef';
-import './components/SmartChef.css';
+import React from "react";
+import "./App.css";
+import SmartChef from "./components/SmartChef";
+import "./components/SmartChef.css";
 
 function App() {
   return (
