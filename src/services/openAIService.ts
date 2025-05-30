@@ -2,9 +2,7 @@ import { Ingredient, Dish } from "../types";
 import OpenAI from "openai";
 
 // API call to OpenAI
-export const callOpenAIApi = async (
-  ingredients: Ingredient[]
-): Promise<Dish[]> => {
+export const callOpenAIApi = async (ingredients: string[]): Promise<Dish[]> => {
   try {
     console.log("Calling OpenAI API with ingredients:", ingredients);
 
@@ -35,7 +33,7 @@ export const callOpenAIApi = async (
           content: `Jag har dessa ingredienser: ${ingredients.join(", ")}. 
                    Föreslå tre rätter jag kan laga. 
                    Returnera endast en JSON-array med 3 objekt som innehåller: 
-                   name (string), description (string) och ingredients (array med strängar).
+                   name (string), description (string), ingredients (array med strängar), och instructions (array med strängar för steg-för-steg instruktioner).
                    Mycket viktigt: Svara med ren JSON utan markdown-formatering`,
         },
       ],
@@ -46,9 +44,7 @@ export const callOpenAIApi = async (
     if (!content) {
       throw new Error("OpenAI response is empty");
     }
-
     try {
-      // Parse the returned JSON
       const dishes = JSON.parse(content);
       return dishes;
     } catch (parseError) {

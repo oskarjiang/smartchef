@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Ingredient, Dish } from "../types";
+import { Dish } from "../types";
 import { getRecipeRecommendations } from "../services/recipeService";
 
 const SmartChef: React.FC = () => {
-  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+  const [ingredients, setIngredients] = useState<string[]>([]);
   const [recommendedDishes, setRecommendedDishes] = useState<Dish[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -12,7 +12,7 @@ const SmartChef: React.FC = () => {
     const fetchIngredients = async () => {
       try {
         const response = await fetch("/ingredients.json");
-        const data: Ingredient[] = await response.json();
+        const data: string[] = await response.json();
         setIngredients(data);
       } catch (err) {
         setError("Kunde inte ladda ingredienser");
@@ -55,6 +55,7 @@ const SmartChef: React.FC = () => {
           <>
             <h2>Receptrekommendationer</h2>
             <div className="dishes-list">
+              {" "}
               {recommendedDishes.map((dish, index) => (
                 <div key={index} className="dish-card">
                   <h3>{dish.name}</h3>
@@ -67,6 +68,16 @@ const SmartChef: React.FC = () => {
                       ))}
                     </ul>
                   </div>
+                  {dish.instructions && dish.instructions.length > 0 && (
+                    <div className="dish-instructions">
+                      <strong>Instruktioner:</strong>
+                      <ol>
+                        {dish.instructions.map((step, i) => (
+                          <li key={i}>{step}</li>
+                        ))}
+                      </ol>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

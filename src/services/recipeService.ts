@@ -1,9 +1,9 @@
-import { Ingredient, Dish } from "../types";
+import { Dish } from "../types";
 import { callOpenAIApi } from "./openAIService";
 
 // Function to get recipe recommendations based on ingredients
 export const getRecipeRecommendations = async (
-  ingredients: Ingredient[]
+  ingredients: string[]
 ): Promise<Dish[]> => {
   try {
     // Call the OpenAI service to get recipe recommendations
