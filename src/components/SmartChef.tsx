@@ -1,6 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Dish } from "../types";
 import { getRecipeRecommendations } from "../services/recipeService";
+import {
+  Container,
+  Typography,
+  Button,
+  Grid,
+  Card,
+  CardContent,
+  Box,
+  CircularProgress,
+  Alert,
+  List,
+  ListItem,
+  ListItemText,
+} from "@mui/material";
+import { Dish } from "../types";
 
 const SmartChef: React.FC = () => {
   const [ingredients, setIngredients] = useState<string[]>([]);
@@ -47,59 +61,105 @@ const SmartChef: React.FC = () => {
     }
   };
   return (
-    <div className="smart-chef">
-      <h1>Smart Kock</h1>
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Typography
+        variant="h2"
+        component="h1"
+        gutterBottom
+        align="center"
+        sx={{ mb: 4 }}
+      >
+        SmartChef
+      </Typography>
+
       {/* Recipe Recommendations */}
-      <div className="recommendations-section">
-        {recommendedDishes.length > 0 ? (
+      <Box sx={{ mb: 4 }}>
+        {recommendedDishes.length > 0 && (
           <>
-            <h2>Receptrekommendationer</h2>
-            <div className="dishes-list">
-              {" "}
+            <Typography variant="h4" component="h2" gutterBottom sx={{ mb: 2 }}>
+              Receptrekommendationer
+            </Typography>
+            <Grid container spacing={3}>
               {recommendedDishes.map((dish, index) => (
-                <div key={index} className="dish-card">
-                  <h3>{dish.name}</h3>
-                  <p>{dish.description}</p>
-                  <div className="dish-ingredients">
-                    <strong>Ingredienser:</strong>
-                    <ul>
-                      {dish.ingredients.map((ing, i) => (
-                        <li key={i}>{ing}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  {dish.instructions && dish.instructions.length > 0 && (
-                    <div className="dish-instructions">
-                      <strong>Instruktioner:</strong>
-                      <ol>
-                        {dish.instructions.map((step, i) => (
-                          <li key={i}>{step}</li>
+                <Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
+                  <Card variant="outlined" sx={{ height: "100%" }}>
+                    <CardContent>
+                      <Typography variant="h5" component="h3" gutterBottom>
+                        {dish.name}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {dish.description}
+                      </Typography>
+
+                      <Typography
+                        variant="subtitle1"
+                        sx={{ fontWeight: "bold", mt: 2 }}
+                      >
+                        Ingredienser:
+                      </Typography>
+                      <List dense>
+                        {dish.ingredients.map((ing, i) => (
+                          <ListItem key={i} sx={{ py: 0.5 }}>
+                            <ListItemText primary={ing} />
+                          </ListItem>
                         ))}
-                      </ol>
-                    </div>
-                  )}
-                </div>
+                      </List>
+
+                      {dish.instructions && dish.instructions.length > 0 && (
+                        <Box sx={{ mt: 2 }}>
+                          <Typography
+                            variant="subtitle1"
+                            sx={{ fontWeight: "bold" }}
+                          >
+                            Instruktioner:
+                          </Typography>
+                          <List dense sx={{ listStyleType: "decimal", pl: 4 }}>
+                            {dish.instructions.map((step, i) => (
+                              <ListItem
+                                key={i}
+                                sx={{ display: "list-item", py: 0.5 }}
+                              >
+                                <ListItemText primary={step} />
+                              </ListItem>
+                            ))}
+                          </List>
+                        </Box>
+                      )}
+                    </CardContent>
+                  </Card>
+                </Grid>
               ))}
-            </div>
+            </Grid>
           </>
-        ) : (
-          <></>
         )}
 
-        {loading && <div className="loading">Laddar rekommendationer...</div>}
-        {error && <div className="error">{error}</div>}
+        {loading && (
+          <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
+            <CircularProgress />
+          </Box>
+        )}
 
-        <button
-          className="recommend-button"
-          onClick={getRecommendations}
-          disabled={loading || ingredients?.length === 0}
-        >
-          {loading
-            ? "Hämtar rekommendationer..."
-            : "Hämta receptrekommendationer"}
-        </button>
-      </div>
-    </div>
+        {error && (
+          <Alert severity="error" sx={{ my: 2 }}>
+            {error}
+          </Alert>
+        )}
+
+        <Box sx={{ mt: 4, textAlign: "center" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={getRecommendations}
+            disabled={loading || ingredients?.length === 0}
+            size="large"
+          >
+            {loading
+              ? "Hämtar rekommendationer..."
+              : "Hämta receptrekommendationer"}
+          </Button>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 
