@@ -3,52 +3,62 @@
     {
       "id": 1,
       "name": "Rice",
-      "category": "Grains"
+      "category": "Grains",
+      "quantity": "2 cups"
     },
     {
       "id": 2,
       "name": "Pasta",
-      "category": "Grains"
+      "category": "Grains",
+      "quantity": "1 box"
     },
     {
       "id": 3,
       "name": "Potatoes",
-      "category": "Vegetables"
+      "category": "Vegetables",
+      "quantity": "5 medium"
     },
     {
       "id": 4,
       "name": "Butter",
-      "category": "Dairy"
+      "category": "Dairy",
+      "quantity": "250g"
     },
     {
       "id": 5,
       "name": "Milk",
-      "category": "Dairy"
+      "category": "Dairy",
+      "quantity": "1 liter"
     },
     {
       "id": 6,
       "name": "Eggs",
-      "category": "Protein"
+      "category": "Protein",
+      "quantity": "12"
     },
     {
       "id": 7,
       "name": "Chicken",
-      "category": "Protein"
+      "category": "Protein",
+      "quantity": "500g"
     },
     {
       "id": 8,
       "name": "Onions",
-      "category": "Vegetables"
+      "category": "Vegetables",
+      "quantity": "3"
     },
     {
       "id": 9,
       "name": "Garlic",
-      "category": "Vegetables"
+      "category": "Vegetables",
+      "quantity": "1 bulb"
     },
     {
       "id": 10,
       "name": "Tomatoes",
-      "category": "Vegetables"
+      "category": "Vegetables",
+      "quantity": "4"
     }
   ]
 }

@@ -21,25 +21,32 @@ h1 {
   margin-bottom: 30px;
 }
 
-.ingredients-list {
+.ingredients-header {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
-.ingredient-item {
-  padding: 8px 16px;
-  border-radius: 20px;
-  background-color: #f1f1f1;
+.ingredients-content {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #fafafa;
+}
+
+.toggle-button {
+  padding: 6px 12px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.2s ease;
   font-size: 14px;
 }
 
-.ingredient-item.selected {
-  background-color: #4caf50;
-  color: white;
+.toggle-button:hover {
+  background-color: #e5e5e5;
 }
 
 .ingredient-category {
@@ -47,42 +54,25 @@ h1 {
 }
 
 .ingredient-category h3 {
-  margin: 10px 0;
+  margin: 15px 0 10px;
   color: #555;
   font-size: 18px;
   border-bottom: 1px solid #eee;
   padding-bottom: 5px;
 }
 
-.search-box {
-  margin-bottom: 15px;
+.ingredients-list {
+  padding-left: 20px;
 }
 
-.search-box input {
-  width: 100%;
-  padding: 10px 15px;
-  border-radius: 20px;
-  border: 1px solid #ddd;
-  font-size: 16px;
-  outline: none;
-  transition: border-color 0.3s ease;
+.ingredient-name {
+  font-weight: 500;
+  margin-right: 5px;
 }
 
-.search-box input:focus {
-  border-color: #2196f3;
-}
-
-.selected-count {
-  margin-bottom: 15px;
-  font-size: 16px;
-  color: #555;
-}
-
-.no-ingredients {
-  text-align: center;
-  padding: 20px;
+.ingredient-quantity {
   color: #666;
-  font-style: italic;
+  font-size: 14px;
 }
 
 .recommend-button {
