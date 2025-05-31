@@ -10,6 +10,7 @@ interface TodoistTask {
   id: string;
   content: string;
   project_id: string;
+  parent_id: string | null;
 }
 
 // Function to fetch items from Todoist's "Matinventarie" project
@@ -77,7 +78,9 @@ export const getTodoistItems = async (): Promise<string[]> => {
     const tasks: TodoistTask[] = await tasksResponse.json();
 
     // Extract only the task content (ingredient names)
-    const ingredients = tasks.map((task) => task.content);
+    const ingredients = tasks
+      .filter((task) => task.parent_id !== null)
+      .map((task) => task.content);
 
     console.log(
       `Fetched ${ingredients.length} ingredients from Todoist project 'Matinventarie'`
