@@ -27,6 +27,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "powershell -Command \"Copy-Item -Path './build' -Destination '\\\\RT-AX86U_PRO-B0\\Share\\smartchef' -Recurse -Force\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
