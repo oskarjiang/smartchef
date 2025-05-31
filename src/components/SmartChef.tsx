@@ -28,14 +28,19 @@ const SmartChef: React.FC = () => {
   // Check if Todoist API key is configured
   useEffect(() => {
     const todoistApiKey = process.env.REACT_APP_TODOIST_API_KEY;
-    setTodoistConfigured(!!todoistApiKey);
+    const isConfigured =
+      !!todoistApiKey && todoistApiKey !== "your_todoist_api_token_here";
+    setTodoistConfigured(isConfigured);
 
-    if (!todoistApiKey) {
+    if (!isConfigured) {
       console.warn(
-        "Todoist API key is not configured. Set REACT_APP_TODOIST_API_KEY in your .env file."
+        "Todoist API key is not properly configured. Set REACT_APP_TODOIST_API_KEY in your .env file to your Todoist API token."
       );
+      if (useTodoist) {
+        setUseTodoist(false);
+      }
     }
-  }, []);
+  }, [useTodoist]);
 
   // Fetch ingredients from JSON file as fallback
   useEffect(() => {
@@ -105,7 +110,7 @@ const SmartChef: React.FC = () => {
           >
             SmartChef
           </Typography>
-          {todoistConfigured && (
+          {todoistConfigured ? (
             <div
               style={{
                 display: "flex",
@@ -132,6 +137,14 @@ const SmartChef: React.FC = () => {
                 </IconButton>
               </Tooltip>
             </div>
+          ) : (
+            <Alert
+              severity="info"
+              sx={{ my: 2, maxWidth: "600px", mx: "auto" }}
+            >
+              För att använda Todoist som ingredienskälla, konfigurera
+              REACT_APP_TODOIST_API_KEY i .env-filen.
+            </Alert>
           )}
         </div>
 
@@ -191,21 +204,41 @@ const SmartChef: React.FC = () => {
             </Alert>
           )}
           {recommendedDishes.length === 0 && (
-            <div className="button-container">
-              <button
-                className="recommend-button"
-                onClick={getRecommendations}
-                disabled={
-                  loading || (!todoistConfigured && ingredients?.length === 0)
-                }
-              >
-                {loading
-                  ? "Hämtar rekommendationer..."
-                  : `Hämta receptrekommendationer${
-                      useTodoist ? " från Todoist" : ""
-                    }`}
-              </button>
-            </div>
+            <>
+              {useTodoist && todoistConfigured && (
+                <Alert
+                  severity="info"
+                  sx={{ my: 2, maxWidth: "600px", mx: "auto" }}
+                >
+                  Använder ingredienser från ditt Todoist-projekt
+                  "Matinventarie".
+                </Alert>
+              )}
+              {!useTodoist && ingredients.length > 0 && (
+                <Alert
+                  severity="info"
+                  sx={{ my: 2, maxWidth: "600px", mx: "auto" }}
+                >
+                  Använder {ingredients.length} ingredienser från lokal
+                  ingredienslista.
+                </Alert>
+              )}
+              <div className="button-container">
+                <button
+                  className="recommend-button"
+                  onClick={getRecommendations}
+                  disabled={
+                    loading || (!todoistConfigured && ingredients?.length === 0)
+                  }
+                >
+                  {loading
+                    ? "Hämtar rekommendationer..."
+                    : `Hämta receptrekommendationer${
+                        useTodoist ? " från Todoist" : ""
+                      }`}
+                </button>
+              </div>
+            </>
           )}
         </Box>
       </Container>

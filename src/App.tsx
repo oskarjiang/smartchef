@@ -6,25 +6,57 @@ import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#2196f3",
+      main: "#e67e22", // Orange color to match the SmartChef theme
+      dark: "#d35400",
+      light: "#f39c12",
     },
     secondary: {
-      main: "#f50057",
+      main: "#2ecc71", // Green for contrast
+    },
+    info: {
+      main: "#3498db",
+    },
+    error: {
+      main: "#e74c3c",
+    },
+    background: {
+      default: "#fffaf2",
     },
   },
   typography: {
     fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
+      "Poppins",
+      "Montserrat",
       "Roboto",
-      "Oxygen",
-      "Ubuntu",
-      "Cantarell",
       '"Open Sans"',
-      '"Helvetica Neue"',
       "sans-serif",
     ].join(","),
+    h1: {
+      fontFamily: "Poppins, sans-serif",
+      fontWeight: 700,
+    },
+    h2: {
+      fontFamily: "Poppins, sans-serif",
+      fontWeight: 600,
+    },
+  },
+  components: {
+    MuiAlert: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 50,
+          textTransform: "none",
+          fontWeight: 600,
+        },
+      },
+    },
   },
 });
 

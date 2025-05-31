@@ -11,15 +11,26 @@ export const getRecipeRecommendationsFromTodoist = async (): Promise<
     const ingredients = await getTodoistItems();
 
     if (ingredients.length === 0) {
-      throw new Error("No ingredients found in Todoist");
+      throw new Error(
+        "Inga ingredienser hittades i Todoist-projektet 'Matinventarie'. Lägg till några ingredienser där först."
+      );
     }
+
+    console.log(
+      `Using ${ingredients.length} ingredients from Todoist:`,
+      ingredients
+    );
 
     // Call the OpenAI service to get recipe recommendations
     const recommendations = await callOpenAIApi(ingredients);
     return recommendations;
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error getting recipe recommendations from Todoist:", error);
-    throw error;
+    if (error.message.includes("Matinventarie")) {
+      throw new Error(`Todoist-fel: ${error.message}`);
+    } else {
+      throw error;
+    }
   }
 };
 

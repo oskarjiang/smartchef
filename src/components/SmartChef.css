@@ -321,6 +321,11 @@ h1 {
   transition: transform 0.5s ease;
 }
 
+.MuiAlert-root {
+  margin: 16px 0;
+  font-family: "Open Sans", sans-serif;
+}
+
 .dish-card:hover {
   transform: translateY(-8px) rotateX(0);
   box-shadow: 0 20px 40px rgba(150, 100, 50, 0.15);

@@ -3,13 +3,17 @@ import OpenAI from "openai";
 import testData from "../test_data.json";
 
 // API call to OpenAI
-export const callOpenAIApi = async (ingredients: string[]): Promise<Dish[]> => {  try {    // Debug environment variables
+export const callOpenAIApi = async (ingredients: string[]): Promise<Dish[]> => {
+  try {
+    // Debug environment variables
     console.log("Environment variables:", {
       useTestData: process.env.REACT_APP_USE_TEST_DATA,
       apiKey: process.env.REACT_APP_OPENAI_API_KEY ? "[REDACTED]" : "undefined",
-      allEnvVars: Object.keys(process.env).filter(key => key.startsWith('REACT_APP_'))
+      allEnvVars: Object.keys(process.env).filter((key) =>
+        key.startsWith("REACT_APP_")
+      ),
     });
-      // Check if we should use test data instead of calling the API
+    // Check if we should use test data instead of calling the API
     if (process.env.REACT_APP_USE_TEST_DATA === "true") {
       console.log("Using test data instead of calling OpenAI API");
       console.log("Test data available:", Array.isArray(testData));

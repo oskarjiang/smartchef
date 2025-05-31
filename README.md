@@ -20,7 +20,12 @@ Smart Chef is a React application that recommends recipes based on the ingredien
 
    - Copy `.env.example` to `.env`
    - Replace `your_openai_api_key_here` with your actual OpenAI API key
-   - Replace `your_todoist_api_key_here` with your Todoist API token (from Todoist Settings > Integrations > API token)
+   - Replace `your_todoist_api_token_here` with your Todoist API token:
+     - Login to Todoist web app
+     - Go to Settings (gear icon) > Integrations > Developer
+     - Copy your API token
+   - Create a project named "Matinventarie" in your Todoist account
+   - Add your ingredients as tasks in this project
    - Set `REACT_APP_USE_TEST_DATA=true` if you want to use test data instead of calling OpenAI
 
 4. Start the development server:
