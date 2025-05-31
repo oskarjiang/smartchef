@@ -172,7 +172,7 @@ const SmartChef: React.FC = () => {
                 >
                   {loading
                     ? "Hämtar rekommendationer..."
-                    : `Hämta receptrekommendationer${
+                    : `Hämta recept${
                         useLocalIngredients ? " från lokal lista" : ""
                       }`}
                 </button>

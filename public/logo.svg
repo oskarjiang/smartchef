@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="250" fill="#FFFAF2" stroke="#E6D5C3" stroke-width="12"/>
+  
+  <!-- Chef hat -->
+  <path d="M256 90C210 90 180 130 180 170C180 200 200 220 230 230L282 230C312 220 332 200 332 170C332 130 302 90 256 90Z" fill="white" stroke="#432818" stroke-width="8"/>
+  
+  <!-- Hat top -->
+  <path d="M256 90C240 50 200 60 190 90C230 70 282 70 322 90C312 60 272 50 256 90Z" fill="#E67E22" stroke="#432818" stroke-width="8"/>
+  
+  <!-- Cooking pan -->
+  <path d="M170 260C170 240 200 230 256 230C312 230 342 240 342 260L332 360C332 380 300 390 256 390C212 390 180 380 180 360L170 260Z" fill="#E67E22" stroke="#432818" stroke-width="8"/>
+  
+  <!-- Pan handle -->
+  <path d="M342 280L392 270C402 268 412 275 412 285L412 305C412 315 402 322 392 320L342 310" fill="#614936" stroke="#432818" stroke-width="8"/>
+  
+  <!-- Steam 1 -->
+  <path d="M230 220C230 200 220 190 220 170C220 150 235 150 235 170C235 190 245 200 245 220" stroke="#795548" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Steam 2 -->
+  <path d="M260 210C260 190 250 180 250 160C250 140 265 140 265 160C265 180 275 190 275 210" stroke="#795548" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Steam 3 -->
+  <path d="M290 220C290 200 280 190 280 170C280 150 295 150 295 170C295 190 305 200 305 220" stroke="#795548" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Spoon -->
+  <path d="M120 350C130 320 150 310 170 340C190 370 170 390 140 360" fill="#C2956E" stroke="#432818" stroke-width="6"/>
+</svg>
