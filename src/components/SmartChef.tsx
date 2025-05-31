@@ -3,17 +3,7 @@ import {
   getRecipeRecommendations,
   getRecipeRecommendationsFromTodoist,
 } from "../services/recipeService";
-import {
-  Container,
-  Typography,
-  Box,
-  Alert,
-  Switch,
-  FormControlLabel,
-  Tooltip,
-  IconButton,
-} from "@mui/material";
-import InfoIcon from "@mui/icons-material/Info";
+import { Container, Typography, Box, Alert } from "@mui/material";
 import { Dish } from "../types";
 import "./SmartChef.css";
 
@@ -22,8 +12,12 @@ const SmartChef: React.FC = () => {
   const [recommendedDishes, setRecommendedDishes] = useState<Dish[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [useTodoist, setUseTodoist] = useState<boolean>(true);
   const [todoistConfigured, setTodoistConfigured] = useState<boolean>(false);
+
+  // Determine whether to use local ingredients from env variable (defaulting to Todoist)
+  // Placed outside of useEffect to avoid dependency issues
+  const useLocalIngredients =
+    process.env.REACT_APP_USE_LOCAL_INGREDIENTS === "true";
 
   // Check if Todoist API key is configured
   useEffect(() => {
@@ -32,20 +26,17 @@ const SmartChef: React.FC = () => {
       !!todoistApiKey && todoistApiKey !== "your_todoist_api_token_here";
     setTodoistConfigured(isConfigured);
 
-    if (!isConfigured) {
+    if (!isConfigured && !useLocalIngredients) {
       console.warn(
-        "Todoist API key is not properly configured. Set REACT_APP_TODOIST_API_KEY in your .env file to your Todoist API token."
+        "Todoist API key is not properly configured. Set REACT_APP_TODOIST_API_KEY in your .env file to your Todoist API token or set REACT_APP_USE_LOCAL_INGREDIENTS=true."
       );
-      if (useTodoist) {
-        setUseTodoist(false);
-      }
     }
-  }, [useTodoist]);
+  }, []); // No dependencies needed as useLocalIngredients is constant
 
-  // Fetch ingredients from JSON file as fallback
+  // Fetch ingredients from JSON file if using local ingredients
   useEffect(() => {
-    // Only fetch from JSON if we're not using Todoist or if Todoist isn't configured
-    if (!useTodoist || !todoistConfigured) {
+    // Only fetch from JSON if we're using local ingredients or if Todoist isn't configured
+    if (useLocalIngredients || !todoistConfigured) {
       const fetchIngredients = async () => {
         try {
           const response = await fetch("/ingredients.json");
@@ -59,7 +50,7 @@ const SmartChef: React.FC = () => {
 
       fetchIngredients();
     }
-  }, [useTodoist, todoistConfigured]);
+  }, [todoistConfigured]); // useLocalIngredients is constant and doesn't need to be in the dependency array
 
   // Get recipe recommendations using ingredients
   const getRecommendations = async () => {
@@ -69,7 +60,7 @@ const SmartChef: React.FC = () => {
     try {
       let dishes: Dish[];
 
-      if (useTodoist && todoistConfigured) {
+      if (!useLocalIngredients && todoistConfigured) {
         // Use Todoist as the ingredient source
         dishes = await getRecipeRecommendationsFromTodoist();
       } else {
@@ -110,42 +101,6 @@ const SmartChef: React.FC = () => {
           >
             SmartChef
           </Typography>
-          {todoistConfigured ? (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                marginBottom: "16px",
-              }}
-            >
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={useTodoist}
-                    onChange={(e) => setUseTodoist(e.target.checked)}
-                    color="primary"
-                  />
-                }
-                label={`Använd ${
-                  useTodoist ? "Todoist" : "lokal"
-                } ingredienslista`}
-              />
-              <Tooltip title="Hämtar ingredienser från ditt Todoist-projekt 'Matinventarie'. Kontrollera att projektet finns och innehåller ingredienser.">
-                <IconButton size="small" color="primary">
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </div>
-          ) : (
-            <Alert
-              severity="info"
-              sx={{ my: 2, maxWidth: "600px", mx: "auto" }}
-            >
-              För att använda Todoist som ingredienskälla, konfigurera
-              REACT_APP_TODOIST_API_KEY i .env-filen.
-            </Alert>
-          )}
         </div>
 
         {/* Recipe Recommendations */}
@@ -193,7 +148,9 @@ const SmartChef: React.FC = () => {
               </div>
               <p className="cooking-text">
                 Söker efter recept för{" "}
-                {useTodoist ? "dina Todoist-ingredienser" : "dina ingredienser"}
+                {useLocalIngredients
+                  ? "dina lokala ingredienser"
+                  : "dina ingredienser"}
                 ...
               </p>
             </div>
@@ -205,24 +162,6 @@ const SmartChef: React.FC = () => {
           )}
           {recommendedDishes.length === 0 && (
             <>
-              {useTodoist && todoistConfigured && (
-                <Alert
-                  severity="info"
-                  sx={{ my: 2, maxWidth: "600px", mx: "auto" }}
-                >
-                  Använder ingredienser från ditt Todoist-projekt
-                  "Matinventarie".
-                </Alert>
-              )}
-              {!useTodoist && ingredients.length > 0 && (
-                <Alert
-                  severity="info"
-                  sx={{ my: 2, maxWidth: "600px", mx: "auto" }}
-                >
-                  Använder {ingredients.length} ingredienser från lokal
-                  ingredienslista.
-                </Alert>
-              )}
               <div className="button-container">
                 <button
                   className="recommend-button"
@@ -234,7 +173,7 @@ const SmartChef: React.FC = () => {
                   {loading
                     ? "Hämtar rekommendationer..."
                     : `Hämta receptrekommendationer${
-                        useTodoist ? " från Todoist" : ""
+                        useLocalIngredients ? " från lokal lista" : ""
                       }`}
                 </button>
               </div>
