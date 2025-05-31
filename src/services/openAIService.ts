@@ -51,6 +51,9 @@ export const callOpenAIApi = async (ingredients: string[]): Promise<Dish[]> => {
                    Exkludera bakverk och desserter.
                    Försök föreslå minst en rätt baserad på ris.
                    Försök föreslå minst en rätt baserad på pasta.
+                   En portion pasta är 85g, en portion ris är 60g.
+                   I description, inkludera även en länk till den recptet som du inspirerats av.
+                   Ge recepten för fyra portioner.
                    För ingredients som är del av rätten, inkludera mängd
                    Returnera endast en JSON-array med 3 objekt som innehåller: 
                    name (string), description (string), ingredients (array med strängar), och instructions (array med strängar för steg-för-steg instruktioner).
