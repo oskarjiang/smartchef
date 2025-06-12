@@ -1,27 +1,9 @@
 import { Dish } from "../types";
 import OpenAI from "openai";
-import testData from "../test_data.json";
 
 // API call to OpenAI
 export const callOpenAIApi = async (ingredients: string[]): Promise<Dish[]> => {
   try {
-    // Debug environment variables
-    console.log("Environment variables:", {
-      useTestData: process.env.REACT_APP_USE_TEST_DATA,
-      apiKey: process.env.REACT_APP_OPENAI_API_KEY ? "[REDACTED]" : "undefined",
-      allEnvVars: Object.keys(process.env).filter((key) =>
-        key.startsWith("REACT_APP_")
-      ),
-    });
-    // Check if we should use test data instead of calling the API
-    if (process.env.REACT_APP_USE_TEST_DATA === "true") {
-      console.log("Using test data instead of calling OpenAI API");
-      console.log("Test data available:", Array.isArray(testData));
-      return testData as Dish[];
-    }
-
-    console.log("Calling OpenAI API with ingredients:", ingredients);
-
     const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
     if (!apiKey) {
       throw new Error(
@@ -65,17 +47,15 @@ export const callOpenAIApi = async (ingredients: string[]): Promise<Dish[]> => {
 
     const content = completion.choices[0].message.content;
     if (!content) {
-      throw new Error("OpenAI response is empty");
+      throw new Error("Svaret från OpenAI är tomt");
     }
     try {
       const dishes = JSON.parse(content);
       return dishes;
     } catch (parseError) {
-      console.error("Failed to parse OpenAI response:", content);
-      throw new Error("Invalid response format from OpenAI");
+      throw new Error("Ogiltigt svarformat från OpenAI");
     }
   } catch (error) {
-    console.error("Error calling OpenAI API:", error);
-    throw new Error("Failed to get recipes from OpenAI");
+    throw new Error("Misslyckades med att hämta recept från OpenAI");
   }
 };
