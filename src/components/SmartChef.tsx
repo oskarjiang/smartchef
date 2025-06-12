@@ -16,10 +16,12 @@ const SmartChef: React.FC = () => {
     setLoading(false);
   };
 
-  return (
-    <div className="app-container">
+  return (    <div className="app-container">
       <Container maxWidth="lg" sx={{ py: 4 }} className="smart-chef">
         <div className="page-header">
+          <div className="logo-container">
+            <img src="/logo.svg" alt="SmartChef Logo" className="app-logo" />
+          </div>
           <Typography
             variant="h2"
             component="h1"
