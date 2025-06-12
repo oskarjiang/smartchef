@@ -2,13 +2,6 @@
 
 Smart Chef is a React application that recommends recipes based on the ingredients you have. It uses OpenAI's API to generate intelligent recipe recommendations.
 
-## Features
-
-- Select ingredients from a categorized list
-- Search for specific ingredients
-- Get AI-powered recipe recommendations
-- View detailed recipe information
-
 ## Getting Started
 
 1. Clone this repository
