@@ -3,7 +3,7 @@ import {
   getRecipeRecommendations,
   getRecipeRecommendationsFromTodoist,
 } from "../services/recipeService";
-import { Container, Typography, Box, Alert } from "@mui/material";
+import { Container, Typography, Box } from "@mui/material";
 import { Dish } from "../types";
 import "./SmartChef.css";
 
@@ -11,7 +11,6 @@ const SmartChef: React.FC = () => {
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [recommendedDishes, setRecommendedDishes] = useState<Dish[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
   const [todoistConfigured, setTodoistConfigured] = useState<boolean>(false);
 
   // Determine whether to use local ingredients from env variable (defaulting to Todoist)
@@ -43,7 +42,6 @@ const SmartChef: React.FC = () => {
           const data: string[] = await response.json();
           setIngredients(data);
         } catch (err) {
-          setError("Kunde inte ladda ingredienser");
           console.error("Error loading ingredients:", err);
         }
       };
@@ -55,37 +53,12 @@ const SmartChef: React.FC = () => {
   // Get recipe recommendations using ingredients
   const getRecommendations = async () => {
     setLoading(true);
-    setError(null);
-
-    try {
-      let dishes: Dish[];
-
-      if (!useLocalIngredients && todoistConfigured) {
-        // Use Todoist as the ingredient source
-        dishes = await getRecipeRecommendationsFromTodoist();
-      } else {
-        // Use local ingredients as fallback
-        if (ingredients.length === 0) {
-          setError("Inga ingredienser tillgängliga");
-          setLoading(false);
-          return;
-        }
-        dishes = await getRecipeRecommendations(ingredients);
-      }
-
-      setRecommendedDishes(dishes);
-
-      if (dishes.length === 0) {
-        setError("Inga recept hittades med tillgängliga ingredienser");
-      }
-    } catch (err: any) {
-      setError(
-        `Kunde inte hämta receptrekommendationer: ${err.message || "Okänt fel"}`
-      );
-      console.error("Error getting recommendations:", err);
-    } finally {
-      setLoading(false);
-    }
+    const dishes =
+      !useLocalIngredients && todoistConfigured
+        ? await getRecipeRecommendationsFromTodoist()
+        : await getRecipeRecommendations(ingredients);
+    setRecommendedDishes(dishes);
+    setLoading(false);
   };
 
   return (
@@ -154,11 +127,6 @@ const SmartChef: React.FC = () => {
                 ...
               </p>
             </div>
-          )}{" "}
-          {error && (
-            <Alert severity="error" sx={{ my: 2 }} className="error">
-              {error}
-            </Alert>
           )}
           {recommendedDishes.length === 0 && (
             <>
