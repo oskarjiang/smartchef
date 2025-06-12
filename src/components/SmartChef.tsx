@@ -1,62 +1,17 @@
-import React, { useState, useEffect } from "react";
-import {
-  getRecipeRecommendations,
-  getRecipeRecommendationsFromTodoist,
-} from "../services/recipeService";
+import React, { useState } from "react";
+import { getRecipeRecommendationsFromTodoist } from "../services/recipeService";
 import { Container, Typography, Box } from "@mui/material";
 import { Dish } from "../types";
 import "./SmartChef.css";
 
 const SmartChef: React.FC = () => {
-  const [ingredients, setIngredients] = useState<string[]>([]);
   const [recommendedDishes, setRecommendedDishes] = useState<Dish[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [todoistConfigured, setTodoistConfigured] = useState<boolean>(false);
-
-  // Determine whether to use local ingredients from env variable (defaulting to Todoist)
-  // Placed outside of useEffect to avoid dependency issues
-  const useLocalIngredients =
-    process.env.REACT_APP_USE_LOCAL_INGREDIENTS === "true";
-
-  // Check if Todoist API key is configured
-  useEffect(() => {
-    const todoistApiKey = process.env.REACT_APP_TODOIST_API_KEY;
-    const isConfigured =
-      !!todoistApiKey && todoistApiKey !== "your_todoist_api_token_here";
-    setTodoistConfigured(isConfigured);
-
-    if (!isConfigured && !useLocalIngredients) {
-      console.warn(
-        "Todoist API key is not properly configured. Set REACT_APP_TODOIST_API_KEY in your .env file to your Todoist API token or set REACT_APP_USE_LOCAL_INGREDIENTS=true."
-      );
-    }
-  }, []); // No dependencies needed as useLocalIngredients is constant
-
-  // Fetch ingredients from JSON file if using local ingredients
-  useEffect(() => {
-    // Only fetch from JSON if we're using local ingredients or if Todoist isn't configured
-    if (useLocalIngredients || !todoistConfigured) {
-      const fetchIngredients = async () => {
-        try {
-          const response = await fetch("/ingredients.json");
-          const data: string[] = await response.json();
-          setIngredients(data);
-        } catch (err) {
-          console.error("Error loading ingredients:", err);
-        }
-      };
-
-      fetchIngredients();
-    }
-  }, [todoistConfigured]); // useLocalIngredients is constant and doesn't need to be in the dependency array
 
   // Get recipe recommendations using ingredients
   const getRecommendations = async () => {
     setLoading(true);
-    const dishes =
-      !useLocalIngredients && todoistConfigured
-        ? await getRecipeRecommendationsFromTodoist()
-        : await getRecipeRecommendations(ingredients);
+    const dishes = await getRecipeRecommendationsFromTodoist();
     setRecommendedDishes(dishes);
     setLoading(false);
   };
@@ -120,11 +75,7 @@ const SmartChef: React.FC = () => {
                 <div className="loading-spinner"></div>
               </div>
               <p className="cooking-text">
-                Söker efter recept för{" "}
-                {useLocalIngredients
-                  ? "dina lokala ingredienser"
-                  : "dina ingredienser"}
-                ...
+                Söker efter recept för dina ingredienser...
               </p>
             </div>
           )}
@@ -134,15 +85,9 @@ const SmartChef: React.FC = () => {
                 <button
                   className="recommend-button"
                   onClick={getRecommendations}
-                  disabled={
-                    loading || (!todoistConfigured && ingredients?.length === 0)
-                  }
+                  disabled={loading}
                 >
-                  {loading
-                    ? "Hämtar rekommendationer..."
-                    : `Hämta recept${
-                        useLocalIngredients ? " från lokal lista" : ""
-                      }`}
+                  {loading ? "Hämtar rekommendationer..." : `Hämta recept`}
                 </button>
               </div>
             </>
