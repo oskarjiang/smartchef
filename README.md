@@ -26,3 +26,8 @@ Smart Chef is a React application that recommends recipes based on the ingredien
    npm start
    ```
 5. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## Deploying to local nginx instance
+
+`npm run build`
+This will build and copy the output to the `/var/www/html/` folder
