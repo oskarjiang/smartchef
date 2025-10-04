@@ -1,6 +1,6 @@
 # Smart Chef Application
 
-Smart Chef is a React application that recommends recipes based on the ingredients you have. It uses OpenAI's API to generate intelligent recipe recommendations.
+Smart Chef is a React application that recommends recipes based on the ingredients you have. It uses OpenAI's API to generate intelligent recipe recommendations. Ingridients are kept within a ToDoist project
 
 ## Getting Started
 
@@ -25,8 +25,3 @@ Smart Chef is a React application that recommends recipes based on the ingredien
    npm start
    ```
 5. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-## Deploying to local nginx instance
-
-`npm run build`
-This will build and copy the output to the `/var/www/html/` folder
